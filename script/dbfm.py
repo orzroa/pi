@@ -44,6 +44,7 @@ def listening():
                     current_status = data.split(':')[1]
                     conn.send('OK')
                 elif data == 'stop':
+                    print str(os.getpid()) + ' listener stoped'
                     break
             except socket.timeout:
                 pass
@@ -65,11 +66,11 @@ def play_list():
                 data = s.recv(1024)
                 s.close()
             except IOError as e:
-                print 'cannot connect to socket, stoping...'
+                print str(os.getpid()) + ' player stopped'
                 return
             try:
                 play_mp3(s_ssid)
-                print s_url, s_ssid, s_title
+                #print s_url, s_ssid, s_title
             except BaseException as e:
                 print e
                 continue
@@ -116,7 +117,7 @@ def stop():
         s.send("stop")
         data = s.recv(1024, 0)
         s.close()
-        os.system("ps -ef|grep vlc|grep mp3|awk '{print $1}'|xargs kill")
+        os.system("ps -ef|grep vlc|grep mp3|awk '{print $2}'|xargs kill")
     except IOError as e:
         pass
     finally:
