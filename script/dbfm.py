@@ -20,7 +20,8 @@ def play_mp3(ssid):
     os.system('cvlc /tmp/%s.mp3 --play-and-exit >/dev/null 2>&1'%ssid)
 
 def down_list():
-    pl_url = "http://douban.fm/j/mine/playlist?type=n&h=|432599:p&channel=1&from=mainsite&r=ecc38a4d94"
+    pl_url = "https://douban.fm/j/v2/playlist?channel=-10&kbps=192&client=s%3Amainsite%7Cy%3A3.0&app_name=radio_website&version=100&type=n"
+    #pl_url = "http://douban.fm/j/mine/playlist?type=n&h=|432599:p&channel=1&from=mainsite&r=ecc38a4d94"
     pl_f = urllib2.urlopen(pl_url)
     data = pl_f.read()
     pl = yajl.loads(data)
